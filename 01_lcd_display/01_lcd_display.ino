@@ -1,6 +1,13 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
+/* Pins explained:
+ * GND = ground
+ * VCC = 5V
+ * SDA = data pin = A4
+ * SCL = clock = A5
+*/
+
 // communication 0x27, 16 characters on 2 lines
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
