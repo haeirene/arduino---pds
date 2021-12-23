@@ -8,7 +8,7 @@
 ## 03 Transistor
 
 1 option to connect a solenoid valve without a relay but with a diode and transistor
--[Link to youtube video](https://youtu.be/Yh3TLXihUps)
+- [Link to youtube video](https://youtu.be/Yh3TLXihUps)
 
 ## 04 Relay
 
