@@ -1,5 +1,6 @@
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal_I2C.h> //Only with I2C module
+//#include <LiquidCrystal.h> //Without I2C module
 
 // Potentiometer
 const int potentioYearPin = A0;
@@ -34,6 +35,7 @@ String currentSeason = "winter";
 
 // communication 0x27, 16 characters on 2 lines
 LiquidCrystal_I2C lcd(0x27, 16, 2);
+// LiquidCrystal lcd(12, 11, 2, 3, 4, 5); //Without I2C module
 
 void setup() {
   Serial.begin(9600);
@@ -45,8 +47,10 @@ void setup() {
   pinMode(btnSummerPrevState, INPUT);
   pinMode(btnAutumnPrevState, INPUT);
   
-  lcd.begin();
-  // Turn on the blacklight and print a message.
+  lcd.begin(); //With I2C module
+  
+  //lcd.begin(16, 2); //Without I2C module
+  //lcd.clear(); //Without I2C module
 }
 
 void loop() {
