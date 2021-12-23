@@ -40,10 +40,10 @@ void setup() {
 
   pinMode(potentioYearPin, INPUT);
   
-  pinMode(btnWinterPrevState, INPUT_PULLUP);
-  pinMode(btnSpringPrevState, INPUT_PULLUP);
-  pinMode(btnSummerPrevState, INPUT_PULLUP);
-  pinMode(btnAutumnPrevState, INPUT_PULLUP);
+  pinMode(btnWinterPrevState, INPUT);
+  //pinMode(btnSpringPrevState, INPUT);
+  pinMode(btnSummerPrevState, INPUT);
+  pinMode(btnAutumnPrevState, INPUT);
   
   lcd.begin();
   // Turn on the blacklight and print a message.
@@ -62,21 +62,25 @@ void debounceButtons(){
   int btnAutumnCurrentState;
   
   btnWinterCurrentState = digitalRead(btnPinWinter);
-  btnSpringCurrentState = digitalRead(btnPinSpring);
+  //btnSpringCurrentState = digitalRead(btnPinSpring);
   btnSummerCurrentState = digitalRead(btnPinSummer);
   btnAutumnCurrentState = digitalRead(btnPinAutumn);
 
   if ((btnWinterPrevState == HIGH) && (btnWinterCurrentState == LOW)){
+    Serial.println("winter");
     currentSeason = "winter";
   }
   else if ((btnSpringPrevState == HIGH) && (btnSpringCurrentState == LOW)){
     currentSeason = "lente";
+    Serial.print("lente");
   }
   else if ((btnSummerPrevState == HIGH) && (btnSummerCurrentState == LOW)){
     currentSeason = "zomer";
+    Serial.println("zomer");
   }
   else if ((btnAutumnPrevState == HIGH) && (btnAutumnCurrentState == LOW)){
     currentSeason = "herfst";
+    Serial.println("herfst");
   }
   
   //Serial.println(currentSeason);
@@ -94,19 +98,59 @@ void debounceButtons(){
 void showData(){
   //map(value, fromLow, fromHigh, toLow, toHigh)
   year = map(analogRead(potentioYearPin), 0, 1023, 1833, 2020);
+  Serial.println(analogRead(potentioYearPin));
   delay(1000);
-  
-  lcd.setCursor(0, 0);
-  lcd.print("Neerslag in de ");
-  
-  lcd.setCursor(0, 1);
-  Serial.println(currentSeason);
-  lcd.print(currentSeason);
 
-  lcd.setCursor(8, 1);
-  lcd.print(" - ");
-
-  lcd.setCursor(11, 1);
-  Serial.println(year);
-  lcd.print(year);
+  if(currentSeason == "lente"){
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Neerslag in de ");
+    
+    lcd.setCursor(0, 1);
+    lcd.print(currentSeason);
+    
+    lcd.setCursor(5, 1);
+    lcd.print(" - ");
+    lcd.setCursor(8, 1);
+    lcd.print(year);
+  }
+  else if(currentSeason == "zomer"){
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Neerslag in de ");
+    
+    lcd.setCursor(0, 1);
+    lcd.print(currentSeason);
+    
+    lcd.setCursor(5, 1);
+    lcd.print(" - ");
+    lcd.setCursor(8, 1);
+    lcd.print(year);
+  }
+  else if(currentSeason == "herfst"){
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Neerslag in de ");
+    
+    lcd.setCursor(0, 1);
+    lcd.print(currentSeason);
+  
+    lcd.setCursor(6, 1);
+    lcd.print(" - ");
+    lcd.setCursor(9, 1);
+    lcd.print(year);
+  }
+  else if(currentSeason == "winter"){
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Neerslag in de ");
+    
+    lcd.setCursor(0, 1);
+    lcd.print(currentSeason);
+    
+    lcd.setCursor(6, 1);
+    lcd.print(" - ");
+    lcd.setCursor(9, 1);
+    lcd.print(year);
+  }
 }
