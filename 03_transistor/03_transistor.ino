@@ -1,17 +1,16 @@
-// To load the computer use the USB-cable of Arduino.
-// To let things work use the Adapter.
-
 int solenoidPin = 7;
 
-void setup()
-{
+void setup() {
+  // put your setup code here, to run once:
   pinMode(solenoidPin, OUTPUT);
 }
 
-void loop()
-{
+void loop() {
+  // put your main code here, to run repeatedly:
   digitalWrite(solenoidPin, HIGH);
-  delay(2000); // Wait for 1000 millisecond(s)
+  delay(10000);
+
+  //Open?
   digitalWrite(solenoidPin, LOW);
-  delay(2000); // Wait for 1000 millisecond(s)
+  delay(10000);
 }
